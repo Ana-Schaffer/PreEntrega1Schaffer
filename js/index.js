@@ -1,32 +1,33 @@
-const precios = {
-  "Chanel": 35000,
-  "My Way": 25000,
-  "ScandaL": 30000,
-  "Dior": 40000
+const productos = [
+  { nombre: "Chanel", precio: 35000 },
+  { nombre: "My Way", precio: 25000 },
+  { nombre: "ScandaL", precio: 30000 },
+  { nombre: "Dior", precio: 40000 }
+];
+
+const mostrarProductos = () => {
+  let mensaje = "Productos disponibles:\n";
+  productos.forEach(producto => {
+    mensaje += producto.nombre + " - $" + producto.precio + "\n";
+  });
+  alert(mensaje);
 };
 
-function mostrarProductos() {
-  let mensaje = "Productos disponibles:\n";
-  for (let producto in precios) {
-    mensaje += producto + " - $" + precios[producto] + "\n";
-  }
-  alert(mensaje);
-}
-
-function calcularCostoTotal(productosSeleccionados) {
+const calcularCostoTotal = productosSeleccionados => {
   let costoTotal = 0;
-  for (let producto in productosSeleccionados) {
-    if (precios.hasOwnProperty(producto)) {
-      costoTotal += precios[producto] * productosSeleccionados[producto];
+  productosSeleccionados.forEach(producto => {
+    const productoEncontrado = productos.find(p => p.nombre === producto.nombre);
+    if (productoEncontrado) {
+      costoTotal += productoEncontrado.precio * producto.cantidad;
     } else {
-      alert("El producto " + producto + " no es válido.");
+      alert("El producto " + producto.nombre + " no es válido.");
       return null;
     }
-  }
+  });
   return costoTotal;
-}
+};
 
-function calcularPagosCuotas(montoTotal, cuotas) {
+const calcularPagosCuotas = (montoTotal, cuotas) => {
   if (cuotas <= 0) {
     alert("La cantidad de cuotas debe ser mayor a cero.");
     return null;
@@ -36,14 +37,14 @@ function calcularPagosCuotas(montoTotal, cuotas) {
   let montoTotalFormateado = montoTotal.toFixed(2);
   alert("El monto total a pagar es: $" + montoTotalFormateado + "\n" +
     "Pagos en " + cuotas + " cuotas de $" + pagoPorCuota + " cada una.");
-}
+};
 
 function saludar() {
   alert("¡Bienvenido a Imported fragances!");
 
   mostrarProductos();
 
-  let productosSeleccionados = {};
+  this.productosSeleccionados = [];
 
   while (true) {
     let opcion = prompt("Ingrese el nombre del producto que desea comprar (o 'salir' para finalizar):");
@@ -52,26 +53,22 @@ function saludar() {
       break;
     }
 
-    let productoEncontrado = false;
-    for (let producto in precios) {
-      if (producto.toLowerCase() === opcion) {
-        productoEncontrado = true;
-        let cantidad = parseInt(prompt("Ingrese la cantidad:"));
-        if (productosSeleccionados.hasOwnProperty(producto)) {
-          productosSeleccionados[producto] += cantidad;
-        } else {
-          productosSeleccionados[producto] = cantidad;
-        }
-        break;
+    const productoEncontrado = productos.find(p => p.nombre.toLowerCase() === opcion);
+    if (productoEncontrado) {
+      let cantidad = parseInt(prompt("Ingrese la cantidad:"));
+      const productoSeleccionado = { nombre: productoEncontrado.nombre, cantidad };
+      const index = this.productosSeleccionados.findIndex(p => p.nombre === productoSeleccionado.nombre);
+      if (index !== -1) {
+        this.productosSeleccionados[index].cantidad += cantidad;
+      } else {
+        this.productosSeleccionados.push(productoSeleccionado);
       }
-    }
-
-    if (!productoEncontrado) {
+    } else {
       alert("El producto " + opcion + " no está definido.");
     }
   }
 
-  let costoTotal = calcularCostoTotal(productosSeleccionados);
+  let costoTotal = calcularCostoTotal(this.productosSeleccionados);
   if (costoTotal !== null) {
     alert("El costo total de los productos seleccionados es: $" + costoTotal.toFixed(2));
 
@@ -81,6 +78,7 @@ function saludar() {
 }
 
 saludar();
+
 
 
 
