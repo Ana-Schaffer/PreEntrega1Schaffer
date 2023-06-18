@@ -5,23 +5,86 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Imported fragances</title>
-    <script src="../js/index.js"></script>
+    <script src="."></script>
     <link rel="stylesheet" href="../css/style.css">
-    <script src="../js/index.js"></script>
 </head>
 <body>
     <header>
-        
+        <div class="logo">
+          <img src="../asset/IMG/Captura de pantalla 2023-06-18 005926.png" alt="Imported Fragances">
+        </div>
+        <nav>
+          <ul>
+            <li><a href="#productos">Productos</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+          </ul>
+          <form>
+            <input type="text" placeholder="Buscar">
+            <button type="submit">Buscar</button>
+          </form>
+          <div class="cart">
+            <img src="../asset/IMG/anadir-a-la-cesta.png" alt="">
+          </div>
+        </nav>
     </header>
-
+      
     <main>
-        <h1>Bienvenido a mi tienda de Imported Fragances</h1>
+        <section id="inicio">
+          <div class="intro">
+            <img src="../asset/IMG/novia-sostiene-botella-perfume-sus-brazos-tiernos.jpg" alt="Foto redonda">
+            <h1>El perfume es la forma más intensa del recuerdo</h1>
+          </div>
+        </section>
+        
+        <section id="productos">
+          <h2>Imported Fragances</h2>
+          <div class="product-card">
+            <img src="../asset/IMG/botella-fragancia-vista-frontal-transparente-piso-blanco.jpg" alt="Producto 1">
+            <h3>Chanel</h3>
+            <p>Precio: $35000</p>
+            <div class="cart">
+                <button class="add-to-cart" onclick="addToCart(1)">Agregar al carrito</button>
+            </div>
+          </div>
+          
+          <div class="product-card">
+            <img src="../asset/IMG/perfume-container.jpg" alt="Producto 2">
+            <h3>My Way</h3>
+            <p>Precio: $25000</p>
+            <div class="cart">
+                <button class="add-to-cart" onclick="addToCart(2)">Agregar al carrito</button>
+            </div>
+          </div>
+          
+          <div class="product-card">
+            <img src="../asset/IMG/chanel.jpg" alt="Producto 3">
+            <h3>ScandaL</h3>
+            <p>Precio: $30000</p>
+            <div class="cart">
+                <button class="add-to-cart" onclick="addToCart(3)">Agregar al carrito</button>
+            </div>
+          </div>
+          
+          <div class="product-card">
+            <img src="../asset/IMG/brand.jpg" alt="Producto 4">
+            <h3>brand</h3>
+            <p>Precio: $40000</p>
+            <div class="cart">
+                <button class="add-to-cart" onclick="addToCart(4)">Agregar al carrito</button>
+            </div>
+          </div>
+        </section>
     </main>
+                
+          <footer>
+            <ul>
+              <li><a href="#"><img src="../asset/IMG/facebook.png" alt="">Facebook</a></li>
+              <li><a href="#"><img src="../asset/IMG/gmail.png" alt="">Gmail</a></li>
+              <li><a href="#"><img src="../asset/IMG/instagram.png" alt="">Instagram</a></li>
+            </ul>
+          </footer>
+          </body>
+          </html>
 
-    <header>
 
-    </header>
-    
-</body>
-</html>
     

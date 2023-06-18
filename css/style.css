@@ -1,155 +1,179 @@
-* {
+/* Estilos generales */
+body {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-}
-
-body {
   font-family: Arial, sans-serif;
 }
 
+/* Estilo del header */
 header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background-color: rgba(0, 0, 0, 0.7);
-  color: #fff;
+  background-color: #f2f2f2;
   padding: 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 }
 
-.logo img {
-  height: 50px;
-}
-
-nav ul {
-  list-style: none;
-  display: flex;
-}
-
-nav ul li {
+header .logo {
   margin-right: 20px;
 }
 
-nav ul li a {
-  color: #fff;
+header .logo img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+}
+
+header nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+header nav ul {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+}
+
+header nav ul li {
+  margin-right: 10px;
+}
+
+header nav ul li a {
   text-decoration: none;
+  color: #333;
+  padding: 5px;
 }
 
-nav ul li a:hover {
-  text-decoration: underline;
+header form {
+  margin-right: 10px;
 }
 
-main {
-  padding-top: 80px;
+header form input[type="text"] {
+  padding: 5px;
 }
 
-.hero-section {
+header form button[type="submit"] {
+  padding: 5px 10px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+header .cart img {
+  width: 25px;
+  height: 25px;
+}
+
+/* Estilo para secciones del main */
+section {
+  margin-bottom: 20px;
+}
+
+/* Estilos adicionales según tus necesidades */
+
+
+/* Estilo de la primera sección */
+#inicio {
+  background-color: #f2f2f2; /* Color de fondo para la sección */
+}
+
+#inicio .intro {
   position: relative;
-  height: 400px;
-  margin-bottom: 50px;
-}
-
-.hero-image img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: 100vh; /* Altura del 100% del viewport */
+  overflow: hidden;
+  z-index: 1; /* Asegura que la sección esté en una capa inferior */
 }
 
-.hero-content {
+#inicio .intro img {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: auto;
+}
+
+#inicio .intro h1 {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  color: #ffffff;
+  font-size: 24px;
   text-align: center;
-  color: #fff;
 }
 
-.title {
-  font-size: 36px;
-  font-weight: bold;
-  margin-bottom: 20px;
-}
+/* Resto de estilos... */
 
-.subtitle {
-  font-size: 18px;
-  margin-bottom: 40px;
-}
 
-.products-nav {
-  background-color: rgba(0, 0, 0, 0.7);
-  padding: 10px 20px;
-}
-
-.products-nav ul li {
-  display: inline;
-  margin-right: 20px;
-}
-
-.products-nav ul li a {
-  color: #fff;
-  text-decoration: none;
-}
-
-.products-nav ul li a:hover {
-  text-decoration: underline;
-}
-
-.cards-section {
+/* Estilos para las tarjetas de producto */
+#productos {
   display: flex;
   justify-content: center;
-  align-items: center;
-}
-
-.card {
-  width: 300px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
   padding: 20px;
-  margin: 10px;
+}
+
+.product-card {
+  width: 250px;
+  margin: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
   text-align: center;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-.card img {
-  width: 100%;
-  height: 200px;
+.product-card img {
+  width: 150px;
+  height: 150px;
   object-fit: cover;
-  border-radius: 5px;
   margin-bottom: 10px;
+  border-radius: 50%;
 }
 
-.card-title {
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 10px;
+.product-card h3 {
+  margin: 0;
+  font-size: 18px;
+  color: #333;
 }
 
-.card-paragraph {
-  margin-bottom: 10px;
+.product-card p {
+  margin: 10px 0;
+  font-size: 14px;
+  color: #777;
 }
 
-.card-button {
-  background-color: #007bff;
+.product-card .cart button {
+  padding: 5px 10px;
+  background-color: #555;
   color: #fff;
   border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
 }
 
+/* Estilos para el footer */
 footer {
-  background-color: #f0f0f0;
-  padding: 20px;
-  text-align: center;
+  background-color: #f8f8f8;
+  padding: 10px;
 }
 
-.social-media a {
+footer ul {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+footer ul li {
   margin: 0 10px;
 }
 
-.social-media img {
-  height: 30px;
+footer ul li a img {
+  width: 30px;
 }
+
+
+
