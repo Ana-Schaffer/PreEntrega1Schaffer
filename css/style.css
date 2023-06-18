@@ -105,7 +105,7 @@ section {
   text-align: center;
 }
 
-/* Resto de estilos... */
+
 
 
 /* Estilos para las tarjetas de producto */
@@ -152,6 +152,22 @@ section {
   color: #fff;
   border: none;
 }
+
+/* Estilos adicionales según tus necesidades */
+.add-to-cart {
+  background-color: #333;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  padding: 5px 10px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.add-to-cart:hover {
+  background-color: #fff;
+  color: #333;
+}
+
 
 /* Estilos para el footer */
 footer {
