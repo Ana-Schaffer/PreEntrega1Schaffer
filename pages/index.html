@@ -5,8 +5,44 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Imported fragances</title>
-    <script src="../js/index.js"></script>
     <link rel="stylesheet" href="../css/style.css">
+    <style>
+      /* Estilos para la ventana emergente */
+      #cartModal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.5);
+      }
+
+      .modal-content {
+        background-color: #fefefe;
+        margin: 10% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+      }
+
+      .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+
+      .close:hover,
+      .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+      }
+    </style>
 </head>
 <body>
     <header>
@@ -18,12 +54,14 @@
             <li><a href="#productos">Productos</a></li>
             <li><a href="#contacto">Contacto</a></li>
           </ul>
-          <form>
-            <input type="text" placeholder="Buscar">
+          <form id="searchForm">
+            <input type="text" placeholder="Buscar" id="searchInput">
             <button type="submit">Buscar</button>
           </form>
           <div class="cart">
             <img src="../asset/IMG/anadir-a-la-cesta.png" alt="">
+            <span id="cartCount">0</span>
+            <button id="cartButton">Ver Carrito</button>
           </div>
         </nav>
     </header>
@@ -39,52 +77,73 @@
         <section id="productos">
           <h2>Imported Fragances</h2>
           <div class="product-card">
-            <img src="../asset/IMG/botella-fragancia-vista-frontal-transparente-piso-blanco.jpg" alt="Producto 1">
+            <img src="../asset/IMG/chanel.jpg" alt="Chanel">
             <h3>Chanel</h3>
             <p>Precio: $35000</p>
             <div class="cart">
-                <button class="add-to-cart" onclick="addToCart(1)">Agregar al carrito</button>
+                <button class="add-to-cart" data-product-name="Chanel">Agregar al carrito</button>
             </div>
           </div>
           
           <div class="product-card">
-            <img src="../asset/IMG/perfume-container.jpg" alt="Producto 2">
+            <img src="../asset/IMG/perfume-container.jpg" alt="My Way">
             <h3>My Way</h3>
             <p>Precio: $25000</p>
             <div class="cart">
-                <button class="add-to-cart" onclick="addToCart(2)">Agregar al carrito</button>
+                <button class="add-to-cart" data-product-name="My Way">Agregar al carrito</button>
             </div>
           </div>
           
           <div class="product-card">
-            <img src="../asset/IMG/chanel.jpg" alt="Producto 3">
+            <img src="../asset/IMG/botella-perfume-producto-belleza.jpg" alt="ScandaL">
             <h3>ScandaL</h3>
             <p>Precio: $30000</p>
             <div class="cart">
-                <button class="add-to-cart" onclick="addToCart(3)">Agregar al carrito</button>
+                <button class="add-to-cart" data-product-name="ScandaL">Agregar al carrito</button>
             </div>
           </div>
           
           <div class="product-card">
-            <img src="../asset/IMG/brand.jpg" alt="Producto 4">
-            <h3>brand</h3>
+            <img src="../asset/IMG/botella-fragancia-vista-frontal-transparente-piso-blanco.jpg" alt="Dior">
+            <h3>Dior</h3>
             <p>Precio: $40000</p>
             <div class="cart">
-                <button class="add-to-cart" onclick="addToCart(4)">Agregar al carrito</button>
+                <button class="add-to-cart" data-product-name="Dior">Agregar al carrito</button>
             </div>
           </div>
         </section>
     </main>
                 
-          <footer>
-            <ul>
-              <li><a href="#"><img src="../asset/IMG/facebook.png" alt="">Facebook</a></li>
-              <li><a href="#"><img src="../asset/IMG/gmail.png" alt="">Gmail</a></li>
-              <li><a href="#"><img src="../asset/IMG/instagram.png" alt="">Instagram</a></li>
-            </ul>
-          </footer>
-          </body>
-          </html>
+    <footer>
+        <ul>
+          <li><a href="#"><img src="../asset/IMG/facebook.png" alt="">Facebook</a></li>
+          <li><a href="#"><img src="../asset/IMG/gmail.png" alt="">Gmail</a></li>
+          <li><a href="#"><img src="../asset/IMG/instagram.png" alt="">Instagram</a></li>
+        </ul>
+    </footer>
+
+    <!-- Ventana emergente del carrito de compra -->
+    <div id="cartModal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h3>Carrito de Compra</h3>
+        <div id="cartProducts"></div>
+        <p id="cartTotal"></p>
+      </div>
+    </div>
+
+    <script src="../js/index.js"></script>
+</body>
+</html>
 
 
-    
+
+
+
+
+
+
+
+
+
+

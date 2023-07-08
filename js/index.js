@@ -14,76 +14,86 @@ class Tienda {
       new Producto("Dior", 40000)
     ];
     this.productosSeleccionados = [];
+    this.cartCount = 0;
+    this.cartTotal = 0;
   }
 
-  mostrarProductos() {
-    let mensaje = "Productos disponibles:\n";
-    this.productos.forEach(producto => {
-      mensaje += producto.nombre + " - $" + producto.precio + "\n";
-    });
-    alert(mensaje);
-  }
+  mostrarProductosSeleccionados() {
+    const cartProductsElement = document.getElementById("cartProducts");
+    cartProductsElement.innerHTML = "";
 
-  calcularCostoTotal() {
-    let costoTotal = 0;
     this.productosSeleccionados.forEach(producto => {
       const productoEncontrado = this.productos.find(p => p.nombre === producto.nombre);
       if (productoEncontrado) {
-        costoTotal += productoEncontrado.precio * producto.cantidad;
-      } else {
-        alert("El producto " + producto.nombre + " no es válido.");
-        return null;
+        const cartItem = document.createElement("div");
+        cartItem.classList.add("cart-item");
+        const nombre = document.createElement("p");
+        nombre.textContent = productoEncontrado.nombre;
+        const cantidad = document.createElement("p");
+        cantidad.textContent = "Cantidad: " + producto.cantidad;
+        const precio = document.createElement("p");
+        precio.textContent = "Precio: $" + (productoEncontrado.precio * producto.cantidad).toFixed(2);
+        cartItem.appendChild(nombre);
+        cartItem.appendChild(cantidad);
+        cartItem.appendChild(precio);
+        cartProductsElement.appendChild(cartItem);
       }
     });
-    return costoTotal;
+
+    const cartTotalElement = document.getElementById("cartTotal");
+    cartTotalElement.textContent = "Total: $" + this.cartTotal.toFixed(2);
   }
 
-  calcularPagosCuotas(montoTotal, cuotas) {
-    if (cuotas <= 0) {
-      alert("La cantidad de cuotas debe ser mayor a cero.");
-      return null;
-    }
+  agregarAlCarrito(productoNombre) {
+    const productoEncontrado = this.productos.find(p => p.nombre === productoNombre);
+    if (productoEncontrado) {
+      const productoSeleccionado = { nombre: productoEncontrado.nombre, cantidad: 1 };
+      const index = this.productosSeleccionados.findIndex(p => p.nombre === productoSeleccionado.nombre);
+      if (index !== -1) {
+        this.productosSeleccionados[index].cantidad++;
+      } else {
+        this.productosSeleccionados.push(productoSeleccionado);
+      }
 
-    let pagoPorCuota = (montoTotal / cuotas).toFixed(2);
-    let montoTotalFormateado = montoTotal.toFixed(2);
-    alert("El monto total a pagar es: $" + montoTotalFormateado + "\n" +
-      "Pagos en " + cuotas + " cuotas de $" + pagoPorCuota + " cada una.");
+      this.cartCount++;
+      this.cartTotal += productoEncontrado.precio;
+
+      console.log("Producto agregado al carrito");
+      this.mostrarProductosSeleccionados();
+      this.actualizarContadorCarrito();
+    } else {
+      console.log("El producto no existe");
+    }
+  }
+
+  actualizarContadorCarrito() {
+    const cartCountElement = document.getElementById("cartCount");
+    cartCountElement.textContent = this.cartCount.toString();
   }
 
   saludar() {
-    alert("¡Bienvenido a Imported fragances!");
+    console.log("¡Bienvenido a Imported Fragances!");
 
-    this.mostrarProductos();
+    const addButtons = document.querySelectorAll(".add-to-cart");
+    addButtons.forEach(button => {
+      button.addEventListener("click", () => {
+        const productName = button.dataset.productName;
+        this.agregarAlCarrito(productName);
+      });
+    });
 
-    while (true) {
-      let opcion = prompt("Ingrese el nombre del producto que desea comprar (o 'salir' para finalizar):");
-      opcion = opcion.toLowerCase();
-      if (opcion === "salir") {
-        break;
-      }
+    const cartButton = document.getElementById("cartButton");
+    cartButton.addEventListener("click", () => {
+      this.mostrarProductosSeleccionados();
+      const cartModal = document.getElementById("cartModal");
+      cartModal.style.display = "block";
+    });
 
-      const productoEncontrado = this.productos.find(p => p.nombre.toLowerCase() === opcion);
-      if (productoEncontrado) {
-        let cantidad = parseInt(prompt("Ingrese la cantidad:"));
-        const productoSeleccionado = { nombre: productoEncontrado.nombre, cantidad };
-        const index = this.productosSeleccionados.findIndex(p => p.nombre === productoSeleccionado.nombre);
-        if (index !== -1) {
-          this.productosSeleccionados[index].cantidad += cantidad;
-        } else {
-          this.productosSeleccionados.push(productoSeleccionado);
-        }
-      } else {
-        alert("El producto " + opcion + " no está definido.");
-      }
-    }
-
-    let costoTotal = this.calcularCostoTotal();
-    if (costoTotal !== null) {
-      alert("El costo total de los productos seleccionados es: $" + costoTotal.toFixed(2));
-
-      let cuotas = parseInt(prompt("Ingrese la cantidad de cuotas:"));
-      this.calcularPagosCuotas(costoTotal, cuotas);
-    }
+    const closeBtn = document.getElementsByClassName("close")[0];
+    closeBtn.addEventListener("click", () => {
+      const cartModal = document.getElementById("cartModal");
+      cartModal.style.display = "none";
+    });
   }
 }
 
@@ -101,3 +111,10 @@ tienda.saludar();
 
 
 
+
+
+
+
+
+
+  
