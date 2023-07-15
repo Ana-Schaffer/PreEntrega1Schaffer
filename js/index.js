@@ -16,6 +16,32 @@ class Tienda {
     this.productosSeleccionados = [];
     this.cartCount = 0;
     this.cartTotal = 0;
+
+    // Restaurar datos desde LocalStorage
+    this.restoreFromLocalStorage();
+  }
+
+  restoreFromLocalStorage() {
+    const storedProductosSeleccionados = localStorage.getItem('productosSeleccionados');
+    if (storedProductosSeleccionados) {
+      this.productosSeleccionados = JSON.parse(storedProductosSeleccionados);
+    }
+
+    const storedCartCount = localStorage.getItem('cartCount');
+    if (storedCartCount) {
+      this.cartCount = parseInt(storedCartCount);
+    }
+
+    const storedCartTotal = localStorage.getItem('cartTotal');
+    if (storedCartTotal) {
+      this.cartTotal = parseFloat(storedCartTotal);
+    }
+  }
+
+  saveToLocalStorage() {
+    localStorage.setItem('productosSeleccionados', JSON.stringify(this.productosSeleccionados));
+    localStorage.setItem('cartCount', this.cartCount.toString());
+    localStorage.setItem('cartTotal', this.cartTotal.toFixed(2));
   }
 
   mostrarProductosSeleccionados() {
@@ -42,6 +68,9 @@ class Tienda {
 
     const cartTotalElement = document.getElementById("cartTotal");
     cartTotalElement.textContent = "Total: $" + this.cartTotal.toFixed(2);
+
+    // Guardar datos en LocalStorage
+    this.saveToLocalStorage();
   }
 
   agregarAlCarrito(productoNombre) {
@@ -69,6 +98,9 @@ class Tienda {
   actualizarContadorCarrito() {
     const cartCountElement = document.getElementById("cartCount");
     cartCountElement.textContent = this.cartCount.toString();
+
+    // Guardar datos en LocalStorage
+    this.saveToLocalStorage();
   }
 
   saludar() {
@@ -94,11 +126,17 @@ class Tienda {
       const cartModal = document.getElementById("cartModal");
       cartModal.style.display = "none";
     });
+
+    // Restaurar estado del carrito al cargar la página
+    this.mostrarProductosSeleccionados();
+    this.actualizarContadorCarrito();
   }
 }
 
 const tienda = new Tienda();
 tienda.saludar();
+
+  
 
 
 
