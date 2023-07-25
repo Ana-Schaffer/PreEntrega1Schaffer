@@ -87,12 +87,23 @@ class Tienda {
       this.cartCount++;
       this.cartTotal += productoEncontrado.precio;
 
-      console.log("Producto agregado al carrito");
+      // Mostrar mensaje de producto agregado al carrito
+      this.mostrarMensaje("¡Producto agregado al carrito!");
+
       this.mostrarProductosSeleccionados();
       this.actualizarContadorCarrito();
     } else {
       console.log("El producto no existe");
     }
+  }
+
+  mostrarMensaje(mensaje) {
+    const mensajeElement = document.getElementById("mensaje");
+    mensajeElement.textContent = mensaje;
+    mensajeElement.style.display = "block";
+    setTimeout(() => {
+      mensajeElement.style.display = "none";
+    }, 2000); // Mostrar el mensaje durante 2 segundos
   }
 
   actualizarContadorCarrito() {
@@ -101,6 +112,29 @@ class Tienda {
 
     // Guardar datos en LocalStorage
     this.saveToLocalStorage();
+  }
+
+  comprar() {
+    // Mostrar mensaje de "Gracias por su compra" después de cerrar la ventana modal
+    const cartModal = document.getElementById("cartModal");
+    cartModal.style.display = "none";
+
+    this.mostrarMensajeCompra();
+
+    this.productosSeleccionados = [];
+    this.cartCount = 0;
+    this.cartTotal = 0;
+    this.mostrarProductosSeleccionados();
+    this.actualizarContadorCarrito();
+  }
+
+  mostrarMensajeCompra() {
+    const mensajeElement = document.getElementById("compraMensaje");
+    mensajeElement.textContent = "¡Gracias por su compra!";
+    mensajeElement.style.display = "block";
+    setTimeout(() => {
+      mensajeElement.style.display = "none";
+    }, 3000); // Mostrar el mensaje durante 3 segundos
   }
 
   saludar() {
@@ -121,6 +155,11 @@ class Tienda {
       cartModal.style.display = "block";
     });
 
+    const comprarButton = document.getElementById("comprarButton");
+    comprarButton.addEventListener("click", () => {
+      this.comprar();
+    });
+
     const closeBtn = document.getElementsByClassName("close")[0];
     closeBtn.addEventListener("click", () => {
       const cartModal = document.getElementById("cartModal");
@@ -136,23 +175,9 @@ class Tienda {
 const tienda = new Tienda();
 tienda.saludar();
 
-  
 
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-  
