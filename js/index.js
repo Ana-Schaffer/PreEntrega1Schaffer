@@ -59,9 +59,14 @@ class Tienda {
         cantidad.textContent = "Cantidad: " + producto.cantidad;
         const precio = document.createElement("p");
         precio.textContent = "Precio: $" + (productoEncontrado.precio * producto.cantidad).toFixed(2);
+        const eliminarBtn = document.createElement("button");
+        eliminarBtn.textContent = "Eliminar";
+        eliminarBtn.dataset.productName = productoEncontrado.nombre;
+        eliminarBtn.addEventListener("click", () => this.eliminarDelCarrito(productoEncontrado.nombre));
         cartItem.appendChild(nombre);
         cartItem.appendChild(cantidad);
         cartItem.appendChild(precio);
+        cartItem.appendChild(eliminarBtn);
         cartProductsElement.appendChild(cartItem);
       }
     });
@@ -94,6 +99,20 @@ class Tienda {
       this.actualizarContadorCarrito();
     } else {
       console.log("El producto no existe");
+    }
+  }
+
+  eliminarDelCarrito(productoNombre) {
+    const index = this.productosSeleccionados.findIndex(p => p.nombre === productoNombre);
+    if (index !== -1) {
+      const productoEncontrado = this.productos.find(p => p.nombre === productoNombre);
+      if (productoEncontrado) {
+        this.cartCount -= this.productosSeleccionados[index].cantidad;
+        this.cartTotal -= productoEncontrado.precio * this.productosSeleccionados[index].cantidad;
+        this.productosSeleccionados.splice(index, 1);
+        this.mostrarProductosSeleccionados();
+        this.actualizarContadorCarrito();
+      }
     }
   }
 
@@ -174,6 +193,7 @@ class Tienda {
 
 const tienda = new Tienda();
 tienda.saludar();
+
 
 
 
