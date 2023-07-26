@@ -1,0 +1,21 @@
+{
+    "productos": [
+      {
+        "nombre": "Chanel",
+        "precio": 35000
+      },
+      {
+        "nombre": "My Way",
+        "precio": 25000
+      },
+      {
+        "nombre": "ScandaL",
+        "precio": 30000
+      },
+      {
+        "nombre": "Dior",
+        "precio": 40000
+      }
+    ]
+  }
+  
