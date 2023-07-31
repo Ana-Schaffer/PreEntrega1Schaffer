@@ -204,4 +204,4 @@ class Tienda {
 }
 
 const tienda = new Tienda();
-tienda.saludar();
+
